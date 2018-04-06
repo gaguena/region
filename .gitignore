@@ -11,6 +11,9 @@ config/database.yml
 log/*
 tmp/*
 
+.cache-main
+.cache-tests
+
 # java specific
 *.class
 
@@ -67,3 +70,4 @@ jrebel.lic
 
 # paulp script
 /.lib/
+/bin/
