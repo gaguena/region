@@ -13,7 +13,7 @@ trait DataBase {
   import dbConfig.driver.api._
 }
 
-class Repository[T] extends DataBase {
+class Repository[T] extends DataBase with QuerySupport{
 
   private def run[T](query: => DBIO[T]): Future[T] = {
     logger.info(s"Repository run $query")
@@ -21,4 +21,5 @@ class Repository[T] extends DataBase {
   }
 
   def transactionally[T](query: => DBIO[T]): Future[T] = run(query.transactionally)
+
 }

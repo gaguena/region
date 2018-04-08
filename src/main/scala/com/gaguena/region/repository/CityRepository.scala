@@ -16,8 +16,11 @@ object CityRepository extends Repository[City] {
     transactionally((all.returning(all.map(_.id)))
       .insertOrUpdate(city).map(_.map(id => city.copy(id = id)).getOrElse(city)))
 
-  def findAll: Future[List[City]] = db.run(all.result.map(_.toList))
+  def findAll: Future[List[City]] = transactionally(all.result.map(_.toList))
 
   def find(id: Long): Future[Option[City]] =
-    db.run(all.filter(_.id === Option(id)).result.map(_.headOption))
+    transactionally(all.filter(_.id === Option(id)).result.map(_.headOption))
+
+  def findBy(title: String): Future[List[City]] =
+    transactionally(all.filter(_.title like likeEnd(title)).result.map(_.toList))
 }

@@ -15,4 +15,6 @@ class CityService {
   def findAll(): Future[List[City]] = CityRepository.findAll
 
   def find(id: Long) = CityRepository.find(id)
+  
+  def findBy(name: String) = CityRepository.findBy(name)
 }
