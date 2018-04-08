@@ -1,4 +1,4 @@
-package com.gaguena.persistence
+package com.gaguena.region.repository
 
 import slick.driver.MySQLDriver.api._
 import scala.concurrent.Future
@@ -21,5 +21,4 @@ class Repository[T] extends DataBase {
   }
 
   def transactionally[T](query: => DBIO[T]): Future[T] = run(query.transactionally)
-
 }
