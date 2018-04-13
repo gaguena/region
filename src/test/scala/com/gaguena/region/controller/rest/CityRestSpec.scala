@@ -8,7 +8,7 @@ import com.gaguena.region.controller.support.JsonScalatraTestSupport
 
 class CityRestSpec extends JsonScalatraTestSupport {
 
-  addRest(new CityRest, "/citys/*")
+  mount(new CityRest, "/citys/*")
 
   "GET /citys/" >> {
     "Recuperar uma lista de Citys and status 200" >> {
