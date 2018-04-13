@@ -7,10 +7,10 @@ import org.scalatra.test.specs2.MutableScalatraSpec
 
 import com.gaguena.region.serializer.LocalDateTimeSerializer
 
-class JsonRestTestSupport extends MutableScalatraSpec {
+class JsonScalatraTestSupport extends MutableScalatraSpec {
 
-  def addRest(t: JsonScalatraSupport, path: String) = 
-    addServlet(t, "/citys/*")
+  def addRest(rest: JsonScalatraSupport, path: String) = 
+    addServlet(rest, "/citys/*")
 
   protected implicit lazy val jsonFormats: Formats = DefaultFormats.withBigDecimal + LocalDateTimeSerializer
 

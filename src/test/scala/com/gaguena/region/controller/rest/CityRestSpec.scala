@@ -1,12 +1,12 @@
 package com.gaguena.region.controller.rest
 
-import org.json4s.{ jvalue2extractable, string2JsonInput }
-import org.json4s.jackson.JsonMethods.parse
+import org.json4s._
+import org.json4s.jackson.JsonMethods._
 
-import com.gaguena.region.controller.support.JsonRestTestSupport
 import com.gaguena.region.model.City
+import com.gaguena.region.controller.support.JsonScalatraTestSupport
 
-class CityRestSpec extends JsonRestTestSupport {
+class CityRestSpec extends JsonScalatraTestSupport {
 
   addRest(new CityRest, "/citys/*")
 
