@@ -36,7 +36,14 @@ class CityRest extends JsonScalatraSupport with CityServiceComponent {
     }
   }
 
-  get("/:name") {
+  get("/:codigo") {
+    new AsyncResult {
+      val codigo = params("codigo").toLong
+      val is = cityService.findBy(codigo).map(l => Ok(l))
+    }
+  }
+
+  get("/name/:name") {
     new AsyncResult {
       val name = params("name")
       println(s"name: $name")
