@@ -14,8 +14,18 @@ class CityRestSpec extends JsonScalatraTestSupport {
     "Recuperar uma lista de Citys and status 200" >> {
       get("/citys/") {
         val result = parse(body).extract[List[City]]
-         result.size should be_>(0)
-         status must_== 200
+        result.size should be_>(0)
+        status must_== 200
+      }
+    }
+  }
+
+  "GET /citys/name/:name" >> {
+    "Recuperar uma lista de Citys com o nome comecando com 'O' and status 200" >> {
+      get("/citys/name/O") {
+        val result = parse(body).extract[List[City]]
+        result.size should be_>(50)
+        status must_== 200
       }
     }
   }
