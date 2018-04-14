@@ -12,6 +12,7 @@ import com.gaguena.region.serializer.LocalDateTimeSerializer
 
 trait JsonScalatraSupport extends ScalatraServlet
     with ContentSupport
+    with JsonOps
     with FutureSupport
     with JacksonJsonSupport
     with UrlGeneratorSupport {
@@ -21,22 +22,18 @@ trait JsonScalatraSupport extends ScalatraServlet
   protected implicit lazy val jsonFormats: Formats = DefaultFormats.withBigDecimal + LocalDateTimeSerializer
 
   private[this] val logger = LoggerFactory.getLogger(getClass)
-    
+
   before() {
     contentType = formats("json")
   }
 
-  private def resultMessage(message: String){
-    ResponseMessage(message)
-  }
-
   def badRequest(message: String) = {
     logger.info(s"BadRequest: $message" )
-    BadRequest(resultMessage(message))
+    BadRequest(message)
   }
   
    def notFound(message: String) = {
     logger.info(s"NotFound: $message" )
-    NotFound(resultMessage(message))
+    NotFound(message)
   }
 }

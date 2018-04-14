@@ -8,13 +8,14 @@ import org.scalatra.{ AsyncResult, BadRequest, Ok }
 import com.gaguena.region.controller.support.JsonScalatraSupport
 import com.gaguena.region.model.City
 import com.gaguena.region.service.CityServiceComponent
+import com.gaguena.region.controller.support.ResponseMessage
 
+import org.json4s.jackson.Serialization._
 class CityRest extends JsonScalatraSupport with CityServiceComponent {
 
   val CityRestType = "application/vnd.gaguena.autor.v1+json"
 
   override val acceptmediaTypes = List(CityRestType)
-
   post("/") {
     new AsyncResult {
       val is = {
@@ -24,7 +25,9 @@ class CityRest extends JsonScalatraSupport with CityServiceComponent {
             println(city)
             cityService.save(city)
           }
-          case Failure(_) => Future.successful(BadRequest("Corpo da requisição(parametros) invalidos"))
+          case Failure(_) => {
+            Future.successful(BadRequest(ResponseMessage("Corpo da requisição(parametros) invalidos").json))
+          }
         }
       }
     }
@@ -46,7 +49,10 @@ class CityRest extends JsonScalatraSupport with CityServiceComponent {
   get("/name/:name") {
     new AsyncResult {
       val name = params("name")
-      val is = cityService.findBy(name).map(l => Ok(l))
+      val is = cityService.findBy(name).map(_ match {
+        case citys if citys.nonEmpty => citys
+        case _ => notFound(ResponseMessage("Nenhuma cidade encontrada!").json)
+      })
     }
   }
 }

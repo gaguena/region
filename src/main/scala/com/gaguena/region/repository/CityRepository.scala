@@ -7,7 +7,6 @@ import slick.driver.MySQLDriver.api._
 import com.gaguena.region.model.City
 import com.gaguena.region.persistence.table.CityTable
 
-
 object CityRepository extends Repository[City] {
 
   lazy val all = TableQuery[CityTable]
