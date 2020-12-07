@@ -1,4 +1,4 @@
-package com.gaguena.persistence
+package com.gaguena.region.persistence
 
 import java.sql.Timestamp
 import java.time.{ LocalDate, LocalDateTime }

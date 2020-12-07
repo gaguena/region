@@ -1,4 +1,4 @@
-package com.gaguena.persistence
+package com.gaguena.region.repository
 
 import slick.driver.MySQLDriver.api._
 import scala.concurrent.Future
@@ -13,7 +13,7 @@ trait DataBase {
   import dbConfig.driver.api._
 }
 
-class Repository[T] extends DataBase {
+class Repository[T] extends DataBase with QuerySupport{
 
   private def run[T](query: => DBIO[T]): Future[T] = {
     logger.info(s"Repository run $query")
